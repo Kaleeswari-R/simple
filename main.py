@@ -1,17 +1,37 @@
+import pandas as pd
 import streamlit as st
 
-def add_numbers(num1, num2):
-    return num1 + num2
 
-# Creating a Streamlit app
-st.title("Add Two Numbers")
+st.header('Introduction to java programming', divider='rainbow')
+st.header('java is :blue[cool] :sunglasses:')
 
-# Input fields for the user to enter two numbers
-num1 = st.number_input("Enter the first number:")
-num2 = st.number_input("Enter the second number:")
+image_path = "C:/Users/Admin/Downloads/download.png"
+st.image(image_path)
 
-# Button to perform the addition when clicked
-if st.button("Add Numbers"):
-    # Calling the add_numbers function and displaying the result
-    result = add_numbers(num1, num2)
-    st.write(f"The sum of {num1} and {num2} is: {result}")
+# Modify the DataFrame to include "Python Preference" and show the increase in the current year
+data_df = pd.DataFrame(
+    {
+        "python preference": [0, 4, 26, 80, 100, 40],
+        "java preference": [10, 30, 60, 90, 120, 150],  # Adjust these values for Python Preference
+    }
+)
+
+# Use the modified DataFrame and column_config
+st.data_editor(
+    data_df,
+    column_config={
+        "java preference": st.column_config.BarChartColumn(
+            "Java Preference (last 6 months)",
+            help="The Java preference volume in the last 6 months",
+            y_min=0,
+            y_max=250,  # Adjust the y_max value based on your data
+        ),
+        "python preference": st.column_config.BarChartColumn(
+            "Python Preference (last 6 months)",
+            help="The Python preference volume in the last 6 months",
+            y_min=0,
+            y_max=250,  # Adjust the y_max value based on your data
+        ),
+    },
+    hide_index=True,
+)
